@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma carta para você</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            min-height: 100vh;
+        }
+
+        /* PRIMEIRA TELA */
+
+        #inicio {
+            min-height: 100vh;
+            background-color: #e9dfce;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .botao-abrir {
+            background-color: transparent;
+            border: 1px solid #8c7963;
+            color: #665440;
+            padding: 16px 35px;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .botao-abrir:hover {
+            background-color: #8c7963;
+            color: #fffaf0;
+        }
+
+        /* SEGUNDA TELA */
+
+        #carta {
+            display: none;
+            min-height: 100vh;
+            padding: 60px 20px;
+            justify-content: center;
+            align-items: center;
+
+            /* Aparência de papel de caderno */
+            background-color: #f7f1df;
+
+            background-image:
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 39px,
+                    #b9c9d2 40px
+                );
+        }
+
+        .folha {
+            width: 100%;
+            max-width: 700px;
+            min-height: 450px;
+            padding: 45px 35px;
+
+            background-color: rgba(255, 253, 245, 0.75);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+            border-left: 2px solid #dba5a5;
+        }
+
+        .texto-carta {
+            color: #38352f;
+            font-size: 23px;
+            line-height: 40px;
+            white-space: pre-wrap;
+        }
+
+        /* Cursor de escrita */
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 23px;
+            background-color: #38352f;
+            margin-left: 3px;
+            animation: piscar 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes piscar {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .folha {
+                padding: 35px 22px;
+                min-height: 400px;
+            }
+
+            .texto-carta {
+                font-size: 19px;
+                line-height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRIMEIRA TELA -->
+
+    <section id="inicio">
+        <button class="botao-abrir" onclick="abrirCarta()">
+            Abrir a carta
+        </button>
+    </section>
+
+
+    <!-- SEGUNDA TELA -->
+
+    <section id="carta">
+        <div class="folha">
+            <p class="texto-carta">
+                <span id="texto"></span><span class="cursor"></span>
+            </p>
+        </div>
+    </section>
+
+
+    <script>
+
+        // Texto que será escrito na carta
+
+        const mensagem =
+        "o rato roeu a roupa do rei de roma, a rainha com raiva rasgou o resto.";
+
+        // Função para abrir a carta
+
+        function abrirCarta() {
+
+            document.getElementById("inicio").style.display = "none";
+
+            document.getElementById("carta").style.display = "flex";
+
+            escreverTexto();
+        }
+
+        // Efeito de escrita gradual
+
+        function escreverTexto() {
+
+            const elemento = document.getElementById("texto");
+
+            let contador = 0;
+
+            const velocidade = 65;
+
+            function escrever() {
+
+                if (contador < mensagem.length) {
+
+                    elemento.textContent += mensagem.charAt(contador);
+
+                    contador++;
+
+                    setTimeout(escrever, velocidade);
+                } else {
+
+                    document.querySelector(".cursor").style.display = "none";
+
+                }
+            }
+
+            escrever();
+        }
+
+    </script>
+
+</body>
+</html>
