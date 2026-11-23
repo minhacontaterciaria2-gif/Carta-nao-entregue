@@ -1,12 +1,23 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Uma carta para você</title>
 
+    <!-- Fonte com aparência de escrita à mão -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -14,148 +25,230 @@
         }
 
         body {
-            font-family: Georgia, serif;
             min-height: 100vh;
+            font-family: Georgia, serif;
         }
 
-        /* PRIMEIRA TELA */
+
+        /* =========================
+           PRIMEIRA TELA
+        ========================= */
 
         #inicio {
             min-height: 100vh;
-            background-color: #e9dfce;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
+            background-color: #eee4d5;
         }
 
         .botao-abrir {
-            background-color: transparent;
-            border: 1px solid #8c7963;
-            color: #665440;
-            padding: 16px 35px;
+            padding: 17px 38px;
+
+            background-color: #c9ad91;
+            color: #fffaf4;
+
+            border: none;
+            border-radius: 35px;
+
             font-family: Georgia, serif;
-            font-size: 20px;
+            font-size: 19px;
+            letter-spacing: 0.3px;
+
             cursor: pointer;
-            transition: 0.3s;
+
+            box-shadow: 0 4px 12px rgba(100, 75, 50, 0.12);
+
+            transition: all 0.3s ease;
         }
 
         .botao-abrir:hover {
-            background-color: #8c7963;
-            color: #fffaf0;
+            background-color: #b99a7d;
+            transform: translateY(-3px);
+
+            box-shadow: 0 7px 16px rgba(100, 75, 50, 0.16);
         }
 
-        /* SEGUNDA TELA */
+
+        /* =========================
+           SEGUNDA TELA - PAPEL
+        ========================= */
 
         #carta {
             display: none;
+
             min-height: 100vh;
-            padding: 60px 20px;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
 
-            /* Aparência de papel de caderno */
-            background-color: #f7f1df;
+            padding: 0;
 
+            background-color: #f8f3e6;
+
+            /* Linhas do caderno */
             background-image:
                 repeating-linear-gradient(
-                    transparent,
+                    to bottom,
+                    transparent 0px,
                     transparent 39px,
-                    #b9c9d2 40px
+                    #c5d1d4 40px
                 );
+
+            background-position: 0 15px;
         }
 
-        .folha {
-            width: 100%;
-            max-width: 700px;
-            min-height: 450px;
-            padding: 45px 35px;
 
-            background-color: rgba(255, 253, 245, 0.75);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        /* Margem e área de escrita */
 
-            border-left: 2px solid #dba5a5;
+        .area-escrita {
+            min-height: 100vh;
+
+            padding-top: 65px;
+            padding-bottom: 60px;
+
+            padding-left: clamp(55px, 12vw, 120px);
+            padding-right: clamp(20px, 8vw, 80px);
+
+            position: relative;
         }
+
+        /* Linha vermelha lateral */
+
+        .area-escrita::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+
+            left: 38px;
+
+            width: 1px;
+
+            background-color: #dbaaaa;
+            opacity: 0.8;
+        }
+
+
+        /* =========================
+           TEXTO MANUSCRITO
+        ========================= */
 
         .texto-carta {
-            color: #38352f;
-            font-size: 23px;
+
+            font-family: 'Caveat', cursive;
+
+            font-size: clamp(25px, 5vw, 34px);
+
+            font-weight: 500;
+
             line-height: 40px;
+
+            color: #39372f;
+
             white-space: pre-wrap;
+
+            overflow-wrap: break-word;
         }
 
-        /* Cursor de escrita */
 
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 23px;
-            background-color: #38352f;
-            margin-left: 3px;
-            animation: piscar 0.8s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes piscar {
-            50% {
-                opacity: 0;
-            }
-        }
+        /* =========================
+           AJUSTES PARA CELULAR
+        ========================= */
 
         @media (max-width: 600px) {
-            .folha {
-                padding: 35px 22px;
-                min-height: 400px;
+
+            #inicio {
+                padding: 20px;
+            }
+
+            .botao-abrir {
+                font-size: 18px;
+                padding: 16px 34px;
+            }
+
+            .area-escrita {
+                padding-top: 55px;
+                padding-bottom: 45px;
+
+                padding-left: 58px;
+                padding-right: 22px;
+            }
+
+            .area-escrita::before {
+                left: 38px;
             }
 
             .texto-carta {
-                font-size: 19px;
+                font-size: 27px;
                 line-height: 40px;
             }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- PRIMEIRA TELA -->
 
     <section id="inicio">
-        <button class="botao-abrir" onclick="abrirCarta()">
+
+        <button class="botao-abrir"
+                onclick="abrirCarta()">
+
             Abrir a carta
+
         </button>
+
     </section>
+
 
 
     <!-- SEGUNDA TELA -->
 
     <section id="carta">
-        <div class="folha">
+
+        <div class="area-escrita">
+
             <p class="texto-carta">
-                <span id="texto"></span><span class="cursor"></span>
+                <span id="texto"></span>
             </p>
+
         </div>
+
     </section>
+
 
 
     <script>
 
-        // Texto que será escrito na carta
+        // Mensagem da carta
 
         const mensagem =
         "o rato roeu a roupa do rei de roma, a rainha com raiva rasgou o resto.";
 
-        // Função para abrir a carta
+
+        // Abrir a carta
 
         function abrirCarta() {
 
             document.getElementById("inicio").style.display = "none";
 
-            document.getElementById("carta").style.display = "flex";
+            document.getElementById("carta").style.display = "block";
 
             escreverTexto();
+
         }
 
-        // Efeito de escrita gradual
+
+        // Animação de escrita
 
         function escreverTexto() {
 
@@ -163,7 +256,8 @@
 
             let contador = 0;
 
-            const velocidade = 65;
+            // Intervalo entre os caracteres
+            const velocidade = 100;
 
             function escrever() {
 
@@ -174,17 +268,17 @@
                     contador++;
 
                     setTimeout(escrever, velocidade);
-                } else {
-
-                    document.querySelector(".cursor").style.display = "none";
 
                 }
+
             }
 
             escrever();
+
         }
 
     </script>
+
 
 </body>
 </html>
